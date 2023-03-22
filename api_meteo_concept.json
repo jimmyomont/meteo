@@ -1,0 +1,4080 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de M\u00e9t\u00e9o Concept",
+        "description": "Pr\u00e9visions, observations, climatologie et plus encore par M\u00e9t\u00e9o Concept",
+        "version": "1.14"
+    },
+    "servers": [
+        {
+            "url": "https:\/\/api.meteo-concept.com",
+            "description": "Unique URL de l'API, sur HTTPS"
+        }
+    ],
+    "paths": {
+        "\/api\/location\/beaches": {
+            "get": {
+                "tags": [
+                    "Localisation"
+                ],
+                "summary": "Informations diverses sur une plage ou une liste de plages recherch\u00e9es.",
+                "operationId": "getBeaches",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Radius"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LimitBeaches"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SearchBeach"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "beaches": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Beach"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "beaches": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Beach"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/location\/beach": {
+            "get": {
+                "tags": [
+                    "Localisation"
+                ],
+                "summary": "Informations diverses sur une plage.",
+                "operationId": "getBeach",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/BeachId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "beaches": {
+                                            "$ref": "#\/components\/schemas\/Beach"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "beaches": {
+                                            "$ref": "#\/components\/schemas\/Beach"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/beach\/daily": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (plages et surf)"
+                ],
+                "summary": "M\u00e9t\u00e9o des plages sur 7 jours pour une plage s\u00e9lectionn\u00e9e",
+                "operationId": "getDailyAllDaysBeachForecast",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/BeachId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "beach": {
+                                            "$ref": "#\/components\/schemas\/Beach"
+                                        },
+                                        "forecasts": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/BeachForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "beach": {
+                                            "$ref": "#\/components\/schemas\/Beach"
+                                        },
+                                        "forecasts": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/BeachForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/beach\/daily\/{day}": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (plages et surf)"
+                ],
+                "summary": "M\u00e9t\u00e9o des plages pour une plage et un jour s\u00e9lectionn\u00e9s",
+                "operationId": "getDailyBeachForecast",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/BeachId"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/BeachForecastDay"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "beach": {
+                                            "$ref": "#\/components\/schemas\/Beach"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/BeachForecast"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "beach": {
+                                            "$ref": "#\/components\/schemas\/Beach"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/BeachForecast"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/beaches\/daily\/{day}\/bbox": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (plages et surf)"
+                ],
+                "summary": "M\u00e9t\u00e9o des plages sur 3 jours dans une zone g\u00e9ographique donn\u00e9e",
+                "operationId": "getDailyBeachForecastInBBox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/North"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/South"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/East"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/West"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/BeachLevel"
+                    },
+                    {
+                        "name": "day",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-2]"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "beaches": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Beach"
+                                            }
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/BeachForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "beaches": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Beach"
+                                            }
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/BeachForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/beach\/daily\/{day}\/map": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (plages et surf)"
+                ],
+                "summary": "M\u00e9t\u00e9o des plages sur 3 jours sur une s\u00e9lection de plages",
+                "operationId": "getDailyBeachForecastForMap",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/BeachList"
+                    },
+                    {
+                        "name": "day",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-2]"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "beaches": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Beach"
+                                            }
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/BeachForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "beaches": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Beach"
+                                            }
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/BeachForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/calendar\/daily.ics": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions journali\u00e8res pour calendrier"
+                ],
+                "summary": "Produit un fichier .ics (iCalendar) avec les\n     *    pr\u00e9visions journali\u00e8res pour les ajouter dans un\n     *    calendrier comme des \u00e9v\u00e8nements.",
+                "operationId": "getDailyForecastCalendar",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Un iCalendar contenant un \u00e9v\u00e9nement pour chaque jour de pr\u00e9vision",
+                        "content": {
+                            "text\/calendar": {}
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/ephemeride\/{day}": {
+            "get": {
+                "tags": [
+                    "Eph\u00e9m\u00e9ride"
+                ],
+                "summary": "Eph\u00e9m\u00e9rides pour un jour donn\u00e9",
+                "operationId": "getEphemeride",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "name": "day",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "\\d+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Ephemeride"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Ephemeride"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (par ville)"
+                ],
+                "summary": "Pr\u00e9visions journali\u00e8res sur les 14 prochains jours pour une commune.",
+                "operationId": "getDailyAllDaysForecast",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDayStart"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDayEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandDayForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandDayForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (par ville)"
+                ],
+                "summary": "Pr\u00e9visions journali\u00e8res pour un jour et pour une commune.",
+                "operationId": "getDailyForecast",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/LandDayForecast"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/LandDayForecast"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/map": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (pour carte)"
+                ],
+                "summary": "Pr\u00e9visions journali\u00e8res pour un jour et pour une liste de commune autour d'une position ou d'une commune. Pr\u00e9vu pour cr\u00e9er des cartes de pr\u00e9visions.",
+                "operationId": "getDailyForecastForMap",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/CityLevel"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Radius"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/CityList"
+                    },
+                    {
+                        "name": "day",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "0?[0-9]|1[0-3]"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandDayForecastForMap"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandDayForecastForMap"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/bbox": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (pour carte)"
+                ],
+                "summary": "Pr\u00e9visions journali\u00e8res pour un jour et pour une zone rectangulaire. Pr\u00e9vu pour cr\u00e9er des cartes de pr\u00e9visions.",
+                "operationId": "getDailyForecastInBBox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/North"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/South"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/East"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/West"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/CityLevel"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandDayForecastForMap"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandDayForecastForMap"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/period\/{period}\/bbox": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (pour carte)"
+                ],
+                "summary": "Pr\u00e9visions journali\u00e8res pour un jour et une p\u00e9riode et pour une zone rectangulaire. Pr\u00e9vu pour cr\u00e9er des cartes de pr\u00e9visions.",
+                "operationId": "getPeriodForecastInBBox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/North"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/South"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/East"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/West"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/CityLevel"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastPeriod"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/periods\/bbox": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (pour carte)"
+                ],
+                "summary": "Pr\u00e9visions journali\u00e8res pour toutes les p\u00e9riodes d'un jour et pour une zone rectangulaire. Pr\u00e9vu pour cr\u00e9er des cartes de pr\u00e9visions.",
+                "operationId": "getPeriodAllPeriodsForecastInBBox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/North"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/South"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/East"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/West"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/CityLevel"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                                },
+                                                "maxItems": 4,
+                                                "minItems": 4
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                                },
+                                                "maxItems": 4,
+                                                "minItems": 4
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/periods": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (par ville)"
+                ],
+                "summary": "Pr\u00e9visions par p\u00e9riodes de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir) sur les 14 prochains jours pour une commune.",
+                "operationId": "getPeriodAllPeriodsAllDaysForecastInBBox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDayStart"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDayEnd"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#\/components\/schemas\/LandQuarterOfDayForecast"
+                                                },
+                                                "maxItems": 4,
+                                                "minItems": 4
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#\/components\/schemas\/LandQuarterOfDayForecast"
+                                                },
+                                                "maxItems": 4,
+                                                "minItems": 4
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/periods": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (par ville)"
+                ],
+                "summary": "Pr\u00e9visions pour les 4 p\u00e9riodes de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir) pour un jour et pour une commune.",
+                "operationId": "getPeriodAllPeriodsOneDayForecast",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#\/components\/schemas\/LandQuarterOfDayRawForecast"
+                                                },
+                                                "maxItems": 4,
+                                                "minItems": 4
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#\/components\/schemas\/LandQuarterOfDayRawForecast"
+                                                },
+                                                "maxItems": 4,
+                                                "minItems": 4
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/period\/{period}": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (par ville)"
+                ],
+                "summary": "Pr\u00e9visions pour une p\u00e9riode de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir), pour un jour et pour une commune.",
+                "operationId": "getPeriodOnePeriodOneDayForecast",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastPeriod"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/LandQuarterOfDayRawForecast"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/LandQuarterOfDayRawForecast"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/periods\/map": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (pour carte)"
+                ],
+                "summary": "Pr\u00e9visions pour les 4 p\u00e9riodes de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir) pour un jour et pour une liste de communes autour d'une position ou d'une commune. Pr\u00e9vu pour cr\u00e9er des cartes de pr\u00e9visions.",
+                "operationId": "getPeriodAllPeriodsOneDayForecastForMap",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/CityLevel"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Radius"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/CityList"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/period\/{period}\/map": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (pour carte)"
+                ],
+                "summary": "Pr\u00e9visions pour une p\u00e9riode de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir) pour un jour et pour une liste de communes autour d'une position ou d'une commune. Pr\u00e9vu pour cr\u00e9er des cartes de pr\u00e9visions.",
+                "operationId": "getPeriodOnePeriodOneDayForecastForMap",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/CityLevel"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Radius"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/CityList"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastPeriod"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/period\/{period}\/staticmap": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (pour carte)"
+                ],
+                "summary": "Pr\u00e9visions pour une p\u00e9riode de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir) pour un jour et pour un pays, une r\u00e9gion ou un d\u00e9partement. Pr\u00e9vu pour cr\u00e9er des cartes de pr\u00e9visions statiques.",
+                "operationId": "getPeriodOnePeriodOneDayForecastForStaticMap",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Country"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Region"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Department"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastPeriod"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "$ref": "#\/components\/schemas\/LandQuarterOfDayForecastForMap"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/daily\/{day}\/hourly": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (par ville)"
+                ],
+                "summary": "Pr\u00e9visions horaires (les 2 premiers jours) ou tri-horaires (jusqu'au 14\u00e8me jour) pour un jour et pour une commune.",
+                "operationId": "getHourlyOneDayForecast",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/HourlyForecast"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LandForecastDay"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandHourForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandHourForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/nextHours": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (par ville)"
+                ],
+                "summary": "Pr\u00e9visions horaires pour les 24 prochaines heures pour une commune",
+                "operationId": "getHourlyNext24HoursForecast",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/HourlyForecast"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/World"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandHourForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "$ref": "#\/components\/schemas\/City"
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/LandHourForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/observations\/around": {
+            "get": {
+                "tags": [
+                    "Observations"
+                ],
+                "summary": "Derni\u00e8re observation des stations m\u00e9t\u00e9o accessibles \u00e0 l'utilisateur.",
+                "operationId": "getStationObservationsAroundGeographicPosition",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Datetime"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingDirection"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingVariable"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Radius"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ObservationWithVariableEmbedding"
+                                    }
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ObservationWithVariableEmbedding"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/climatology\/day\/around": {
+            "get": {
+                "tags": [
+                    "Climatologie"
+                ],
+                "summary": "Climatologie journali\u00e8re des stations m\u00e9t\u00e9o accessibles \u00e0 l'utilisateur.",
+                "operationId": "getDailyClimatologyAroundGeographicPosition",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Date"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingDirection"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingVariable"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Radius"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ClimatologyWithVariableEmbedding"
+                                    }
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ClimatologyWithVariableEmbedding"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/climatology\/month\/around": {
+            "get": {
+                "tags": [
+                    "Climatologie"
+                ],
+                "summary": "Climatologie mensuelle des stations m\u00e9t\u00e9o accessibles \u00e0 l'utilisateur.",
+                "operationId": "getMonthlyClimatologyAroundGeographicPosition",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Month"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingDirection"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingVariable"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Radius"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ClimatologyWithVariableEmbedding"
+                                    }
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ClimatologyWithVariableEmbedding"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/observations\/bbox": {
+            "get": {
+                "tags": [
+                    "Observations"
+                ],
+                "summary": "Derni\u00e8res observations des stations m\u00e9t\u00e9o accessibles \u00e0 l'utilisateur dans une zone d\u00e9limit\u00e9e par ses coordonn\u00e9es g\u00e9ographiques.",
+                "operationId": "getStationObservationsInBBox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Datetime"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingDirection"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingVariable"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/North"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/South"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/East"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/West"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ObservationWithVariableEmbedding"
+                                    }
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ObservationWithVariableEmbedding"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/climatology\/day\/bbox": {
+            "get": {
+                "tags": [
+                    "Climatologie"
+                ],
+                "summary": "Climatologie journali\u00e8re des stations m\u00e9t\u00e9o accessibles \u00e0 l'utilisateur dans une zone d\u00e9limit\u00e9e par ses coordonn\u00e9es g\u00e9ographiques.",
+                "operationId": "getDailyClimatologyInBBox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Date"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingDirection"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingVariable"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/North"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/South"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/East"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/West"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ClimatologyWithVariableEmbedding"
+                                    }
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ClimatologyWithVariableEmbedding"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/climatology\/month\/bbox": {
+            "get": {
+                "tags": [
+                    "Climatologie"
+                ],
+                "summary": "Climatologie mensuelle des stations m\u00e9t\u00e9o accessibles \u00e0 l'utilisateur dans une zone d\u00e9limit\u00e9e par ses coordonn\u00e9es g\u00e9ographiques.",
+                "operationId": "getMonthlyClimatologyInBBox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Month"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingDirection"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/SortingVariable"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/North"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/South"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/East"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/West"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ClimatologyWithVariableEmbedding"
+                                    }
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/ClimatologyWithVariableEmbedding"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/observations\/24h\/station": {
+            "get": {
+                "tags": [
+                    "Observations"
+                ],
+                "summary": "Observations d'une station m\u00e9t\u00e9o accessible \u00e0 l'utilisateur sur 24 heures.",
+                "operationId": "getStationObservationForOneStationOver24h",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Datetime"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ObservationSeries"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ObservationSeries"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/climatology\/day\/station": {
+            "get": {
+                "tags": [
+                    "Climatologie"
+                ],
+                "summary": "Climatologie journali\u00e8re d'une station pour une journ\u00e9e.",
+                "operationId": "getDailyClimatologyForOneStation",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Date"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ClimatologySeries"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ClimatologySeries"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/climatology\/month\/station": {
+            "get": {
+                "tags": [
+                    "Climatologie"
+                ],
+                "summary": "Climatologie mensuelle d'une station pour un mois.",
+                "operationId": "getMonthlyClimatologyForOneStation",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Month"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ClimatologySeries"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ClimatologySeries"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/observations\/nearest": {
+            "get": {
+                "tags": [
+                    "Observations"
+                ],
+                "summary": "Observations m\u00e9t\u00e9o la plus proche \u00e0 une date et heure en Bretagne.",
+                "operationId": "getStationObservationsInBrittanyNearGeographicPosition",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Datetime"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ObservationInBrittanySeries"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ObservationInBrittanySeries"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/climatology\/dju\/station": {
+            "get": {
+                "tags": [
+                    "Climatologie"
+                ],
+                "summary": "DJU chauffage et climatisation \u00e0 partir des donn\u00e9es d'une station pour toutes les journ\u00e9es d'un mois.",
+                "operationId": "getDJUClimatologyForStationForOneMonth",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Date"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Uuid"
+                    },
+                    {
+                        "name": "base",
+                        "in": "query",
+                        "description": "Temp\u00e9rature de r\u00e9f\u00e9rence",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/MonthDjuSeries"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/MonthDjuSeries"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/stations\/bbox": {
+            "get": {
+                "tags": [
+                    "Observations"
+                ],
+                "summary": "Stations disponibles sur une zone g\u00e9ographique pour faire une carte d'observations",
+                "operationId": "getStationsInBbox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/North"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/South"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/East"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/West"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Stations"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Stations"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/observations\/accumulation\/bbox": {
+            "get": {
+                "tags": [
+                    "Observations"
+                ],
+                "summary": "Observations m\u00e9t\u00e9o sur une zone g\u00e9ographique, instantan\u00e9e ou agglom\u00e9r\u00e9e sur une p\u00e9riode.",
+                "operationId": "getStationObservationsInBbox",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/Start"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/End"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/North"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/South"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/East"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/West"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/VariableWithAccumulator"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ObservationsMap"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ObservationsMap"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/location\/city": {
+            "get": {
+                "tags": [
+                    "Localisation"
+                ],
+                "summary": "Informations diverses sur une commune.",
+                "operationId": "getCity",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Place"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/location\/cities": {
+            "get": {
+                "tags": [
+                    "Localisation"
+                ],
+                "summary": "Informations diverses sur une liste de communes recherch\u00e9es.",
+                "operationId": "searchCities",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/SearchCity"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/Place"
+                                    }
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/Place"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/location\/ports": {
+            "get": {
+                "tags": [
+                    "Localisation"
+                ],
+                "summary": "Informations sur une liste de ports recherch\u00e9s.",
+                "operationId": "getPortsAroundGeographicPosition",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Radius"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/LimitPorts"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "ports": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Port"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "ports": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Port"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/location\/port": {
+            "get": {
+                "tags": [
+                    "Localisation"
+                ],
+                "summary": "Informations sur un port.",
+                "operationId": "getPort",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/PortId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "ports": {
+                                            "$ref": "#\/components\/schemas\/Port"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "ports": {
+                                            "$ref": "#\/components\/schemas\/Port"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/stations\/available": {
+            "get": {
+                "tags": [
+                    "Stations"
+                ],
+                "summary": "Stations disponibles aux alentours d'une position g\u00e9ographique ou d'une ville.",
+                "operationId": "getListOfStationsPaginatedForUser",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/OpenStations"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Stations"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Stations"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/stations": {
+            "get": {
+                "tags": [
+                    "Observations"
+                ],
+                "summary": "Stations disponibles aux alentours d'une position g\u00e9ographique ou d'une ville.",
+                "operationId": "getListOfStationNearGeographicPosition",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Radius"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/VariablesList"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Stations"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Stations"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/surf\/daily\/{day}": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (plages et surf)"
+                ],
+                "summary": "Pr\u00e9visions surf horaires pour un jour et pour une plage",
+                "operationId": "getSurfForecastOneDay",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/BeachId"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/BeachForecastDay"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "beach": {
+                                            "$ref": "#\/components\/schemas\/Beach"
+                                        },
+                                        "forecasts": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/SurfForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "beach": {
+                                            "$ref": "#\/components\/schemas\/Beach"
+                                        },
+                                        "forecasts": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/SurfForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/forecast\/uv\/daily\/{day}": {
+            "get": {
+                "tags": [
+                    "Pr\u00e9visions m\u00e9t\u00e9o (indice UV)"
+                ],
+                "summary": "Pr\u00e9visions de l'indice UV pour un jour et pour une commune",
+                "operationId": "getUvForecastOneDay",
+                "parameters": [
+                    {
+                        "$ref": "#\/components\/parameters\/LatitudeLongitude"
+                    },
+                    {
+                        "$ref": "#\/components\/parameters\/Insee"
+                    },
+                    {
+                        "name": "day",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "\\d+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succ\u00e8s",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/UvIndexForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "city": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/City"
+                                            }
+                                        },
+                                        "update": {
+                                            "$ref": "#\/components\/schemas\/UpdateDatetime"
+                                        },
+                                        "forecast": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/UvIndexForecast"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UpdateDatetime": {
+                "description": "La date et heure de mise \u00e0 jour de la pr\u00e9vision",
+                "type": "string",
+                "format": "date-time"
+            },
+            "ForecastLocation": {
+                "oneOf": [
+                    {
+                        "properties": {
+                            "country": {
+                                "description": "Le code ISO-3166-2 du pays de la ville hors France m\u00e9tropolitaine",
+                                "type": "string"
+                            },
+                            "city": {
+                                "description": "Le nom adapt\u00e9 pour les URL de la ville hors France m\u00e9tropolitaine",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "insee": {
+                                "description": "Le code INSEE de la ville fran\u00e7aise",
+                                "type": "string"
+                            },
+                            "cp": {
+                                "description": "Le code postal de la ville fran\u00e7aise",
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "City": {
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/ForecastLocation"
+                    },
+                    {
+                        "properties": {
+                            "name": {
+                                "description": "Le nom de la ville",
+                                "type": "string"
+                            },
+                            "latitude": {
+                                "description": "La latitude (au format d\u00e9cimal) de la ville",
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "description": "La longitude (au format d\u00e9cimal) de la ville",
+                                "type": "number"
+                            },
+                            "altitude": {
+                                "description": "La hauteur (au-dessus du niveau de la mer) de la ville",
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "Ephemeride": {
+                "properties": {
+                    "city": {
+                        "$ref": "#\/components\/schemas\/City"
+                    },
+                    "ephemeride": {
+                        "properties": {
+                            "latitude": {
+                                "description": "La latitude (au format d\u00e9cimal) de l'endroit concern\u00e9",
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "description": "La longitude (au format d\u00e9cimal) de l'endroit concern\u00e9",
+                                "type": "number"
+                            },
+                            "insee": {
+                                "description": "Le code INSEE de la commune concern\u00e9e",
+                                "type": "string"
+                            },
+                            "day": {
+                                "description": "Le jour pour lequel l'\u00e9ph\u00e9m\u00e9ride est donn\u00e9 (0 : aujourd'hui, 1 : demain, etc.)",
+                                "type": "integer"
+                            },
+                            "datetime": {
+                                "description": "La date et heure pour lesquels l'\u00e9ph\u00e9m\u00e9ride est donn\u00e9",
+                                "type": "string",
+                                "format": "datetime"
+                            },
+                            "sunrise": {
+                                "description": "L'heure de lever du soleil",
+                                "type": "string"
+                            },
+                            "sunset": {
+                                "description": "L'heure de coucher du soleil",
+                                "type": "string"
+                            },
+                            "duration_day": {
+                                "description": "Dur\u00e9e du jour",
+                                "type": "string"
+                            },
+                            "diff_duration_day": {
+                                "description": "Diff\u00e9rence de la dur\u00e9e du jour en minutes par rapport \u00e0 la veille",
+                                "type": "integer"
+                            },
+                            "moon_age": {
+                                "description": "Lunaison (avancement en jour dans le cycle lunaire de nouvelle lune \u00e0 nouvelle lune)",
+                                "type": "number"
+                            },
+                            "moon_phase": {
+                                "description": "Phase de la lune en cours",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "UvIndexForecast": {
+                "properties": {
+                    "latitude": {
+                        "description": "La latitude (au format d\u00e9cimal) de l'endroit concern\u00e9",
+                        "type": "number"
+                    },
+                    "longitude": {
+                        "description": "La longitude (au format d\u00e9cimal) de l'endroit concern\u00e9",
+                        "type": "number"
+                    },
+                    "insee": {
+                        "description": "Le code INSEE de la commune concern\u00e9e",
+                        "type": "string"
+                    },
+                    "day": {
+                        "description": "Le jour pour lequel l'indice UV est pr\u00e9vu est donn\u00e9 (0 : aujourd'hui, 1 : demain, etc.)",
+                        "type": "integer"
+                    },
+                    "datetime": {
+                        "description": "La date et heure pour lesquels l'indice UV est donn\u00e9",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "uv": {
+                        "description": "L'indice UV",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Station": {
+                "properties": {
+                    "name": {
+                        "description": "Le nom de la station",
+                        "type": "string"
+                    },
+                    "uuid": {
+                        "description": "L'identifiant de la station (un UUID)",
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "description": "La latitude (au format d\u00e9cimal) de la station",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "description": "La longitude (au format d\u00e9cimal) de la station",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "elevation": {
+                        "description": "L'altitude (en m\u00e8tres au-dessus du niveau de la mer) \u00e0 laquelle la station est install\u00e9e",
+                        "type": "integer"
+                    },
+                    "city": {
+                        "description": "Le nom de la commune o\u00f9 la station est install\u00e9e",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Variable": {
+                "properties": {
+                    "name": {
+                        "description": "Le nom de code du param\u00e8tre m\u00e9t\u00e9orologique mesur\u00e9",
+                        "type": "string"
+                    },
+                    "longname": {
+                        "description": "Le nom complet du param\u00e8tre m\u00e9t\u00e9orologique",
+                        "type": "string"
+                    },
+                    "unit": {
+                        "description": "L'unit\u00e9 dans laquelle le param\u00e8tre m\u00e9t\u00e9orologique est exprim\u00e9",
+                        "type": "string"
+                    },
+                    "resolution": {
+                        "description": "La r\u00e9solution \u00e0 laquelle le param\u00e8tre m\u00e9t\u00e9orologique est mesur\u00e9",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "Stations": {
+                "properties": {
+                    "stations": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#\/components\/schemas\/Station"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Observation": {
+                "properties": {
+                    "time": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object",
+                "additionalProperties": {
+                    "description": "La valeur de chaque param\u00e8tre m\u00e9t\u00e9o (identifi\u00e9 par son nom de code), format\u00e9 comme une cha\u00eene de caract\u00e8res \u00e0 la r\u00e9solution correcte",
+                    "type": "string"
+                }
+            },
+            "ObservationInBrittany": {
+                "properties": {
+                    "datetime": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "uuid": {
+                        "description": "L'identifiant de la station (un UUID)",
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "description": "La latitude (au format d\u00e9cimal) de la station",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "description": "La longitude (au format d\u00e9cimal) de la station",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "name": {
+                        "description": "Le nom de la station",
+                        "type": "string"
+                    },
+                    "temperature": {
+                        "description": "La temp\u00e9rature de l'air",
+                        "type": "number"
+                    },
+                    "wind": {
+                        "description": "La vitesse moyenne du vent",
+                        "type": "number"
+                    },
+                    "dirWind": {
+                        "description": "La vitesse du vent",
+                        "type": "number"
+                    },
+                    "gust": {
+                        "description": "La vitesse des rafales de vent",
+                        "type": "number"
+                    },
+                    "tmin": {
+                        "description": "La temp\u00e9rature minimale de l'air",
+                        "type": "number"
+                    },
+                    "tmax": {
+                        "description": "La temp\u00e9rature maximale de l'air",
+                        "type": "number"
+                    },
+                    "gustMax": {
+                        "description": "La vitesse maximale des rafales envisag\u00e9e",
+                        "type": "number"
+                    },
+                    "sunshine": {
+                        "description": "La vitesse maximale des rafales envisag\u00e9e",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "Climatology": {
+                "properties": {
+                    "time": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                },
+                "type": "object",
+                "additionalProperties": {
+                    "description": "La valeur de chaque param\u00e8tre m\u00e9t\u00e9o (identifi\u00e9 par son nom de code), format\u00e9 comme une cha\u00eene de caract\u00e8res \u00e0 la r\u00e9solution correcte",
+                    "type": "string"
+                }
+            },
+            "BaseObservationOrClimatology": {
+                "properties": {
+                    "station": {
+                        "$ref": "#\/components\/schemas\/Station"
+                    },
+                    "variables": {
+                        "description": "Les param\u00e8tres m\u00e9t\u00e9o disponible dans le relev\u00e9 m\u00e9t\u00e9o",
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#\/components\/schemas\/Variable"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ObservationWithVariableEmbedding": {
+                "properties": {
+                    "station": {
+                        "$ref": "#\/components\/schemas\/Station"
+                    },
+                    "observation": {
+                        "properties": {
+                            "time": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        },
+                        "type": "object",
+                        "additionalProperties": {
+                            "nullable": true,
+                            "allOf": [
+                                {
+                                    "$ref": "#\/components\/schemas\/Variable"
+                                },
+                                {
+                                    "properties": {
+                                        "value": {
+                                            "description": "La valeur mesur\u00e9e pour le param\u00e8tre m\u00e9t\u00e9orologique",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ObservationsMap": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "station": {
+                            "$ref": "#\/components\/schemas\/Station"
+                        },
+                        "time": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "value": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "ClimatologyWithVariableEmbedding": {
+                "properties": {
+                    "station": {
+                        "$ref": "#\/components\/schemas\/Station"
+                    },
+                    "climatology": {
+                        "properties": {
+                            "time": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        },
+                        "type": "object",
+                        "additionalProperties": {
+                            "nullable": true,
+                            "allOf": [
+                                {
+                                    "$ref": "#\/components\/schemas\/Variable"
+                                },
+                                {
+                                    "properties": {
+                                        "value": {
+                                            "description": "La valeur mesur\u00e9e pour le param\u00e8tre m\u00e9t\u00e9orologique",
+                                            "oneOf": [
+                                                {
+                                                    "type": "string"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ObservationSeries": {
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/BaseObservationOrClimatology"
+                    },
+                    {
+                        "properties": {
+                            "observations": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#\/components\/schemas\/Observation"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "ObservationInBrittanySeries": {
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/BaseObservationOrClimatology"
+                    },
+                    {
+                        "properties": {
+                            "observations": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#\/components\/schemas\/ObservationInBrittany"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "ClimatologySeries": {
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/BaseObservationOrClimatology"
+                    },
+                    {
+                        "properties": {
+                            "observations": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#\/components\/schemas\/Climatology"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "MonthDjuSeries": {
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/Station"
+                    },
+                    {
+                        "properties": {
+                            "dju": {
+                                "type": "array",
+                                "items": {
+                                    "properties": {
+                                        "time": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "dju_chauffage": {
+                                            "type": "string"
+                                        },
+                                        "dju_climatisation": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "total": {
+                                "properties": {
+                                    "time": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "dju_chauffage": {
+                                        "type": "string"
+                                    },
+                                    "dju_climatisation": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "BaseForecast": {
+                "properties": {
+                    "latitude": {
+                        "description": "La latitude (au format d\u00e9cimal) du point de pr\u00e9vision",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "description": "La longitude (au format d\u00e9cimal) du point de pr\u00e9vision",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "datetime": {
+                        "description": "La date et heure de l'\u00e9ch\u00e9ance de pr\u00e9vision",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "wind10m": {
+                        "description": "Le vent moyen \u00e0 10m au-dessus du sol, en km\/h",
+                        "type": "integer"
+                    },
+                    "gust10m": {
+                        "description": "Les rafales de vent maximales \u00e0 10m au-dessus du sol, en km\/h",
+                        "type": "integer"
+                    },
+                    "dirwind10m": {
+                        "description": "La direction du vent moyen en degr\u00e9s, \u00e0 10m au-dessus du sol",
+                        "type": "integer"
+                    },
+                    "weather": {
+                        "description": "Le code du temps sensible",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ProbabilityForecast": {
+                "properties": {
+                    "probafrost": {
+                        "description": "La probabilit\u00e9 d'observer du gel sur la p\u00e9riode de pr\u00e9vision, en %",
+                        "type": "integer"
+                    },
+                    "probafog": {
+                        "description": "La probabilit\u00e9 d'observer du brouillard sur la p\u00e9riode de pr\u00e9vision, en %",
+                        "type": "integer"
+                    },
+                    "probawind70": {
+                        "description": "La probabilit\u00e9 d'observer un coup de vent (rafales > 70km\/h) sur la p\u00e9riode de pr\u00e9vision, en %",
+                        "type": "integer"
+                    },
+                    "probawind100": {
+                        "description": "La probabilit\u00e9 d'observer une temp\u00eate (rafales > 100km\/h) sur la p\u00e9riode de pr\u00e9vision, en %",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ProbabilityMaps": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "day": {
+                            "description": "Jour de la pr\u00e9vision (de 0 : aujourd'hui \u00e0 13 : dans treize jours)",
+                            "type": "integer",
+                            "maximum": 13,
+                            "minimum": 0
+                        },
+                        "period": {
+                            "description": "P\u00e9riode de la pr\u00e9vision (0 : nuit, 1 : matin, 2 : apr\u00e8s-midi, 3 : soir\u00e9e)",
+                            "type": "integer",
+                            "maximum": 3,
+                            "minimum": 0
+                        },
+                        "datetime": {
+                            "description": "La date et heure du d\u00e9but de la p\u00e9riode de 6h concern\u00e9e par la carte",
+                            "type": "string",
+                            "format": "datetime"
+                        },
+                        "map_probarain": {
+                            "description": "L'URL de la carte du risque de pluie",
+                            "type": "string"
+                        },
+                        "map_probawind70": {
+                            "description": "L'URL de la carte du risque de coup de vent",
+                            "type": "string"
+                        },
+                        "map_probawind100": {
+                            "description": "L'URL de la carte du risque de coup de temp\u00eate",
+                            "type": "string"
+                        },
+                        "map_probafog": {
+                            "description": "L'URL de la carte du risque de brouillard",
+                            "type": "string"
+                        },
+                        "map_probafrost": {
+                            "description": "L'URL de la carte du risque de gel",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "LandHourForecast": {
+                "description": "Une pr\u00e9vision \u00e9tablie pour une heure ou une tranche de trois heures",
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/ForecastLocation"
+                    },
+                    {
+                        "$ref": "#\/components\/schemas\/BaseForecast"
+                    },
+                    {
+                        "$ref": "#\/components\/schemas\/ProbabilityForecast"
+                    },
+                    {
+                        "properties": {
+                            "temp2m": {
+                                "description": "La temp\u00e9rature \u00e0 2m du sol \u00e0 l'heure de pr\u00e9vision, en \u00b0C",
+                                "type": "integer"
+                            },
+                            "rh2m": {
+                                "description": "L'humidit\u00e9 relative \u00e0 2m du sol \u00e0 l'heure de pr\u00e9vision, en %",
+                                "type": "integer"
+                            },
+                            "rr10": {
+                                "description": "Le cumul de pluie sur la tranche horaire ou tri-horaire, en mm",
+                                "type": "integer"
+                            },
+                            "rr1": {
+                                "description": "Le cumul de pluie maximal attendu sur la tranche horaire ou tri-horaire (en cas d'orage, par exemple), en mm",
+                                "type": "integer"
+                            },
+                            "weather": {
+                                "description": "Le code-temps pour le temps sensible \u00e0 l'heure de pr\u00e9vision",
+                                "type": "integer"
+                            },
+                            "tsoil1": {
+                                "description": "La temp\u00e9rature du sol, \u00e0 une profondeur entre 0 et 10cm, en \u00b0C",
+                                "type": "integer"
+                            },
+                            "tsoil2": {
+                                "description": "La temp\u00e9rature du sol, \u00e0 une profondeur entre 10 et 40cm, en \u00b0C",
+                                "type": "integer"
+                            },
+                            "gustx": {
+                                "description": "La rafale maximale attendue sur la tranche horaire ou tri-horaire, si un orage ou un grain est pr\u00e9vu, en km\/h",
+                                "type": "integer"
+                            },
+                            "iso0": {
+                                "description": "L'altitude de l'isotherme 0\u00b0C (en m, au-dessus du niveau de la mer)",
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "LandQuarterOfDayRawForecast": {
+                "description": "Une pr\u00e9vision \u00e9tablie pour une p\u00e9riode de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir\u00e9e)",
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/BaseForecast"
+                    },
+                    {
+                        "$ref": "#\/components\/schemas\/ProbabilityForecast"
+                    },
+                    {
+                        "properties": {
+                            "day": {
+                                "description": "Le jour de la pr\u00e9vision (de 0 : aujourd'hui, \u00e0 13 : dans treize jours)",
+                                "type": "integer",
+                                "maximum": 13,
+                                "minimum": 0
+                            },
+                            "period": {
+                                "description": "La p\u00e9riode de la pr\u00e9vision (0 : nuit, 1 : matin, 2 : apr\u00e8s-midi, 3 : soir\u00e9e)",
+                                "type": "integer",
+                                "maximum": 3,
+                                "minimum": 0
+                            },
+                            "temp2m": {
+                                "description": "La temp\u00e9rature \u00e0 2m du sol en moyenne sur la p\u00e9riode, en \u00b0C",
+                                "type": "integer"
+                            },
+                            "rh2m": {
+                                "description": "L'humidit\u00e9 relative \u00e0 2m du sol en moyenne sur la p\u00e9riode, en %",
+                                "type": "integer"
+                            },
+                            "rr10": {
+                                "description": "Le cumul de pluie sur la p\u00e9riode, en mm",
+                                "type": "integer"
+                            },
+                            "rr1": {
+                                "description": "Le cumul de pluie maximal attendu sur la p\u00e9riode (en cas d'orage, par exemple), en mm",
+                                "type": "integer"
+                            },
+                            "weather": {
+                                "description": "Le code-temps pour le temps sensible g\u00e9n\u00e9ral pour la p\u00e9riode",
+                                "type": "integer"
+                            },
+                            "gustx": {
+                                "description": "La rafale maximale attendue sur la p\u00e9riode, si un orage ou un grain est pr\u00e9vu, en km\/h",
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "LandQuarterOfDayForecast": {
+                "description": "Une pr\u00e9vision \u00e9tablie pour une p\u00e9riode de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir\u00e9e) avec les informations de ville",
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/ForecastLocation"
+                    },
+                    {
+                        "$ref": "#\/components\/schemas\/LandQuarterOfDayRawForecast"
+                    }
+                ]
+            },
+            "LandQuarterOfDayForecastForMap": {
+                "description": "Une pr\u00e9vision \u00e9tablie pour une p\u00e9riode de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir\u00e9e) avec les informations de ville",
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/LandQuarterOfDayForecast"
+                    },
+                    {
+                        "properties": {
+                            "name": {
+                                "description": "Le nom de la ville du point de pr\u00e9vision",
+                                "type": "string"
+                            },
+                            "nameURL": {
+                                "description": "Le nom de la ville adapt\u00e9 pour les URL du point de pr\u00e9vision",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "LandDayForecast": {
+                "description": "Une pr\u00e9vision \u00e9tablie pour une p\u00e9riode de la journ\u00e9e (nuit, matin, apr\u00e8s-midi, soir\u00e9e)",
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/ForecastLocation"
+                    },
+                    {
+                        "$ref": "#\/components\/schemas\/BaseForecast"
+                    },
+                    {
+                        "$ref": "#\/components\/schemas\/ProbabilityForecast"
+                    },
+                    {
+                        "properties": {
+                            "day": {
+                                "description": "Le jour de la pr\u00e9vision (de 0 : aujourd'hui, \u00e0 13 : dans treize jours)",
+                                "type": "integer",
+                                "maximum": 13,
+                                "minimum": 0
+                            },
+                            "rr10": {
+                                "description": "Le cumul de pluie sur la journ\u00e9e, en mm",
+                                "type": "number",
+                                "format": "float"
+                            },
+                            "rr1": {
+                                "description": "Le cumul de pluie maximal attendu sur la journ\u00e9e (en cas d'orage, par exemple), en mm",
+                                "type": "number",
+                                "format": "float"
+                            },
+                            "weather": {
+                                "description": "Le code-temps pour le temps sensible g\u00e9n\u00e9ral pour la journ\u00e9e",
+                                "type": "integer"
+                            },
+                            "tmin": {
+                                "description": "La temp\u00e9rature minimale de la journ\u00e9e, en \u00b0C",
+                                "type": "integer"
+                            },
+                            "tmax": {
+                                "description": "La temp\u00e9rature maximale de la journ\u00e9e, en \u00b0C",
+                                "type": "integer"
+                            },
+                            "sun_hours": {
+                                "description": "Le nombre d'heures d'ensoleillement sur la journ\u00e9e",
+                                "type": "integer"
+                            },
+                            "etp": {
+                                "description": "L'\u00e9vapotranspiration cumul\u00e9e sur la journ\u00e9e, en mm",
+                                "type": "number"
+                            },
+                            "gustx": {
+                                "description": "La rafale maximale attendue sur la tranche horaire ou tri-horaire, si un orage ou un grain est pr\u00e9vu, en km\/h",
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "LandDayForecastForMap": {
+                "description": "Une pr\u00e9vision \u00e9tablie pour une journ\u00e9e avec les informations de ville",
+                "allOf": [
+                    {
+                        "$ref": "#\/components\/schemas\/LandDayForecast"
+                    },
+                    {
+                        "properties": {
+                            "name": {
+                                "description": "Le nom de la ville du point de pr\u00e9vision",
+                                "type": "string"
+                            },
+                            "nameURL": {
+                                "description": "Le nom de la ville adapt\u00e9 pour les URL du point de pr\u00e9vision",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "Beach": {
+                "description": "Une plage d'une ville",
+                "properties": {
+                    "id": {
+                        "title": "The beach id in the database",
+                        "description": "L'identifiant de la plage (sp\u00e9cifique \u00e0 M\u00e9t\u00e9o Concept)",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "The beach name",
+                        "description": "Le nom de la plage",
+                        "type": "string"
+                    },
+                    "cp": {
+                        "title": "The postal code of the town",
+                        "description": "Le code postal de la commune de la plage",
+                        "type": "integer"
+                    },
+                    "insee": {
+                        "title": "The INSEE code of the town",
+                        "description": "Le code INSEE de la commune de la plage",
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "title": "The beach latitude",
+                        "description": "La latitude (au format d\u00e9cimal) de la plage",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "title": "The beach latitude",
+                        "description": "La longitude (au format d\u00e9cimal) de la plage",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "adress": {
+                        "title": "The beach postal address",
+                        "description": "L'adresse postale de la plage",
+                        "type": "string"
+                    },
+                    "city": {
+                        "title": "The beach town",
+                        "description": "Le nom de la commune de la plage",
+                        "type": "string"
+                    },
+                    "pmr": {
+                        "title": "Whether the beach is accessible to people with reduced mobility (elderly people, wheelchairs, etc.)",
+                        "description": "Acc\u00e8s pour personnes \u00e0 mobilit\u00e9 r\u00e9duite (PMR)",
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "title": "A description (often a touristic one) for the beach",
+                        "description": "Une description de la plage et de ses \u00e9quipements",
+                        "type": "string"
+                    },
+                    "pictures": {
+                        "title": "A list of picture URLs, separated by pipes (\"|\")",
+                        "description": "Une liste de photos de la plage (URL s\u00e9par\u00e9es par des | )",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "BeachForecast": {
+                "description": "Une \u00e9ch\u00e9ance de pr\u00e9vision horaire pour une plage, avec les conditions de l'air et de l'eau",
+                "properties": {
+                    "id_beach": {
+                        "title": "The beach id the database",
+                        "description": "L'identifiant de la plage",
+                        "type": "integer"
+                    },
+                    "day": {
+                        "title": "The lead time (in days) of the forecast (0 to 7)",
+                        "description": "Le jour de pr\u00e9vision (0 : aujourd'hui, 1 : demain, etc.)",
+                        "type": "integer"
+                    },
+                    "datetime": {
+                        "title": "The date and time of the forecast",
+                        "description": "La date et heure de l'\u00e9ch\u00e9ance de pr\u00e9vision",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "wind10m": {
+                        "title": "The average wind speed at 10m above ground, in km\/h",
+                        "description": "Le vent moyen \u00e0 10m au-dessus du sol, en km\/h",
+                        "type": "integer"
+                    },
+                    "gust10m": {
+                        "title": "The wind gust speed at 10m above groung, in km\/h",
+                        "description": "Les rafales de vent \u00e0 10m au-dessus du sol, en km\/h",
+                        "type": "integer"
+                    },
+                    "dirwind10m": {
+                        "title": "The wind direction at 10m above grounds, in degrees",
+                        "description": "La direction du vent en degr\u00e9s, \u00e0 10m au-dessus du sol",
+                        "type": "integer"
+                    },
+                    "weather": {
+                        "title": "The weather code",
+                        "description": "Le code du temps sensible",
+                        "type": "integer"
+                    },
+                    "temp": {
+                        "title": "The air temperature at 2m above ground, in \u00b0C",
+                        "description": "La temp\u00e9rature \u00e0 2m du sol en \u00b0C",
+                        "type": "integer"
+                    },
+                    "temp_sea": {
+                        "title": "The water surface temperature, in \u00b0C",
+                        "description": "La temp\u00e9rature de surface de l'eau en \u00b0C",
+                        "type": "integer"
+                    },
+                    "state_sea": {
+                        "title": "The sea state, on the Douglas scale",
+                        "description": "L'\u00e9tat de la mer, sur l'\u00e9chelle de Douglas",
+                        "type": "integer"
+                    },
+                    "uv": {
+                        "title": "The UV index",
+                        "description": "L'indice UV",
+                        "type": "integer"
+                    },
+                    "probafog": {
+                        "title": "The probability to observe fog, in %",
+                        "description": "La probabilit\u00e9 d'observer du brouillard, en %",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Place": {
+                "properties": {
+                    "insee": {
+                        "title": "Code INSEE attribu\u00e9 \u00e0 la commune",
+                        "type": "string"
+                    },
+                    "cp": {
+                        "title": "Code postal de la commune",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Nom de la commune",
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "title": "Latitude d\u00e9cimale du centre (approximatif) de la commune",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "title": "Longitude d\u00e9cimale du centre (approximatif) de la commune",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "altitude": {
+                        "title": "Altitude en m\u00e8tre au-dessus du niveau de la mer de la commune",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Port": {
+                "properties": {
+                    "portid": {
+                        "title": "portid.",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Nom du port",
+                        "type": "string"
+                    },
+                    "insee": {
+                        "title": "Code insee de la commune du port.",
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "title": "Latitude d\u00e9cimale",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "longitude": {
+                        "title": "Longitude d\u00e9cimale",
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object"
+            },
+            "SurfForecast": {
+                "properties": {
+                    "id_beach": {
+                        "title": "Identifiant de la plage.",
+                        "type": "integer"
+                    },
+                    "day": {
+                        "title": "Jour entre 0 et 7",
+                        "type": "integer"
+                    },
+                    "datetime": {
+                        "title": "Date en heure locale.",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "wind10m": {
+                        "title": "Vent moyen \u00e0 10 m\u00e8tres  en km\/h.",
+                        "type": "integer"
+                    },
+                    "gust10m": {
+                        "title": "Rafales de vent \u00e0 10 m\u00e8tres en km\/h.",
+                        "type": "integer"
+                    },
+                    "dirwind10m": {
+                        "title": "Direction du vent en degr\u00e9s.",
+                        "type": "integer"
+                    },
+                    "weather": {
+                        "title": "Temps sensible (Code temps).",
+                        "type": "integer"
+                    },
+                    "temp": {
+                        "title": "Temp\u00e9rature \u00e0 2 m\u00e8tres en \u00b0C.",
+                        "type": "integer"
+                    },
+                    "temp_sea": {
+                        "title": "Temp\u00e9rature de l'eau en \u00b0C.",
+                        "type": "integer"
+                    },
+                    "rr10": {
+                        "title": "Cumul de pluie sur la tranche horaire ou tri-horaire en mm.",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "mwd": {
+                        "title": "Direction des vagues en degr\u00e9s (0 \u00e0 360\u00b0).",
+                        "type": "integer"
+                    },
+                    "swh": {
+                        "title": "Hauteur de vague en m\u00e8tres.",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "tm10": {
+                        "title": "P\u00e9riode des vagues en secondes.",
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "responses": {
+            "Ok": {
+                "description": "La requ\u00eate est valide et une r\u00e9ponse est fournie"
+            },
+            "UnauthorizedError": {
+                "description": "Le token est manquant ou invalide"
+            },
+            "ForbiddenError": {
+                "description": "Le token fourni ne permet pas la requ\u00eate"
+            }
+        },
+        "parameters": {
+            "Datetime": {
+                "name": "datetime",
+                "in": "query",
+                "description": "Date et heure des observations",
+                "schema": {
+                    "type": "string",
+                    "pattern": "^((?:19|20)\\d{2})-(0?\\d|1[012])-(0?\\d|[12]\\d|3[01])T(0?\\d|[1]\\d|2[0123]):(0?\\d|[12345]\\d)((\\+\\d{2}:\\d{2})|(\\s+\\w+\/\\w+))?$",
+                    "example": "2022-01-17T10:30+01:00"
+                }
+            },
+            "DatetimeEnd": {
+                "name": "datetime",
+                "in": "query",
+                "description": "Date et heure de fin des observations",
+                "schema": {
+                    "type": "string",
+                    "pattern": "^((?:19|20)\\d{2})-(0?\\d|1[012])-(0?\\d|[12]\\d|3[01])T(0?\\d|[1]\\d|2[0123]):(0?\\d|[12345]\\d)((\\+\\d{2}:\\d{2})|(\\s+\\w+\/\\w+))?$",
+                    "example": "2022-01-17T10:30+01:00"
+                }
+            },
+            "Start": {
+                "name": "start",
+                "in": "query",
+                "description": "Date et heure de d\u00e9but des observations",
+                "schema": {
+                    "type": "string",
+                    "pattern": "^((?:19|20)\\d{2})-(0?\\d|1[012])-(0?\\d|[12]\\d|3[01])T(0?\\d|[1]\\d|2[0123]):(0?\\d|[12345]\\d)((\\+\\d{2}:\\d{2})|(\\s+\\w+\/\\w+))?$",
+                    "example": "2022-01-17T10:30+01:00"
+                }
+            },
+            "End": {
+                "name": "end",
+                "in": "query",
+                "description": "Date et heure de fin des observations",
+                "schema": {
+                    "type": "string",
+                    "pattern": "^((?:19|20)\\d{2})-(0?\\d|1[012])-(0?\\d|[12]\\d|3[01])T(0?\\d|[1]\\d|2[0123]):(0?\\d|[12345]\\d)((\\+\\d{2}:\\d{2})|(\\s+\\w+\/\\w+))?$",
+                    "example": "2022-01-17T10:30+01:00"
+                }
+            },
+            "Date": {
+                "name": "date",
+                "in": "query",
+                "description": "Date de la climatologie journali\u00e8re",
+                "schema": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2022-01-17"
+                }
+            },
+            "Month": {
+                "name": "date",
+                "in": "query",
+                "description": "Date de la climatologie mensuelle",
+                "schema": {
+                    "type": "string",
+                    "pattern": "^(?:19|20)\\d{2}-(?:0?\\d|1[012])$",
+                    "example": "2022-01"
+                }
+            },
+            "Uuid": {
+                "name": "uuid",
+                "in": "query",
+                "description": "Identifiant de la station",
+                "schema": {
+                    "type": "string",
+                    "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
+                    "example": "cf7629e1-d5a9-4714-b784-79edb29e744f"
+                }
+            },
+            "SortingDirection": {
+                "name": "sorting",
+                "in": "query",
+                "description": "Tri croissant ou d\u00e9croissant",
+                "required": false,
+                "schema": {
+                    "enum": [
+                        "asc",
+                        "desc"
+                    ]
+                }
+            },
+            "SortingVariable": {
+                "name": "param",
+                "in": "query",
+                "description": "Param\u00e8tre m\u00e9t\u00e9orologique \u00e0 trier",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "pattern": "^[a-z1-9_]+$",
+                    "example": "temperature"
+                }
+            },
+            "LatitudeLongitude": {
+                "name": "latlng",
+                "in": "query",
+                "description": "Latitude et longitude du lieu",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "pattern": "^\\-?\\d+\\.?\\d*,\\-?\\d+\\.?\\d*$",
+                    "example": "48.086,-2.635"
+                }
+            },
+            "Country": {
+                "name": "country",
+                "in": "query",
+                "description": "Code du pays (uniquement \"fr\" pour la France pour le moment)",
+                "required": false,
+                "schema": {
+                    "enum": [
+                        "fr"
+                    ]
+                }
+            },
+            "Region": {
+                "name": "region",
+                "in": "query",
+                "description": "Code de la r\u00e9gion :\n* 1 : Bretagne\n* 2 : Pays-de-la-Loire\n* 3 : Normandie\n* 4 : Hauts-de-France\n* 5 : \u00cele-de-France\n* 6 : Centre-Val-de-Loire\n* 7 : Nouvelle-Aquitaine\n* 8 : Occitanie\n* 9 : Grand-Est\n* 10 : Bourgogne-France-Comt\u00e9\n* 11 : Auvergne-Rh\u00f4ne-Alpes\n* 12 : Provence-Alpes-C\u00f4te-d'Azur\n* 13 : Corse\n",
+                "required": false,
+                "schema": {
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13
+                    ]
+                }
+            },
+            "Department": {
+                "name": "department",
+                "in": "query",
+                "description": "Code du d\u00e9partement (num\u00e9rique \u00e0 deux chiffres, sauf 2A et 2B pour les d\u00e9partements corses)",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "pattern": "^([0-9]{2})|(2A)|(2B)$"
+                }
+            },
+            "Insee": {
+                "name": "insee",
+                "in": "query",
+                "description": "Code INSEE de la commune",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "pattern": "^[0-9ABab]{5}$",
+                    "example": "35238"
+                }
+            },
+            "Radius": {
+                "name": "radius",
+                "in": "query",
+                "description": "Rayon autour du point g\u00e9ographique ou de la commune en kilom\u00e8tres",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "example": 50
+                }
+            },
+            "North": {
+                "name": "north",
+                "in": "query",
+                "description": "Fronti\u00e8re nord de la zone (latitude au format d\u00e9cimal)",
+                "required": false,
+                "schema": {
+                    "type": "number",
+                    "maximum": 90,
+                    "minimum": -90,
+                    "example": 49.8
+                }
+            },
+            "South": {
+                "name": "south",
+                "in": "query",
+                "description": "Fronti\u00e8re sud de la zone (latitude au format d\u00e9cimal)",
+                "required": false,
+                "schema": {
+                    "type": "number",
+                    "maximum": 90,
+                    "minimum": -90,
+                    "example": 46.2
+                }
+            },
+            "East": {
+                "name": "east",
+                "in": "query",
+                "description": "Fronti\u00e8re est de la zone (longitude au format d\u00e9cimal)",
+                "required": false,
+                "schema": {
+                    "type": "number",
+                    "maximum": 180,
+                    "minimum": -180,
+                    "example": -0.2
+                }
+            },
+            "West": {
+                "name": "west",
+                "in": "query",
+                "description": "Fronti\u00e8re ouest de la zone (latitude au format d\u00e9cimal)",
+                "required": false,
+                "schema": {
+                    "type": "number",
+                    "maximum": 180,
+                    "minimum": -180,
+                    "example": -4.9
+                }
+            },
+            "CityLevel": {
+                "name": "level",
+                "in": "query",
+                "description": "Filtre des villes en fonction de leur niveau d'importance (1 : importance nationale, 2 : r\u00e9gionale, 3 : d\u00e9partementale)",
+                "required": false,
+                "schema": {
+                    "type": "number",
+                    "maximum": 3,
+                    "minimum": 1,
+                    "example": 2
+                }
+            },
+            "CityList": {
+                "name": "listCity",
+                "in": "query",
+                "description": "S\u00e9lection de villes sous la forme d'une liste de codes INSEE s\u00e9par\u00e9s par des virgules pour laquelle retourner la pr\u00e9vision",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "pattern": "^[0-9ABab]{5}(?:,[0-9ABab]{5})*$"
+                }
+            },
+            "BeachList": {
+                "name": "listCity",
+                "in": "query",
+                "description": "S\u00e9lection de villes sous la forme d'une liste d'identifiants s\u00e9par\u00e9s par des virgules",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "pattern": "^\\d+(?:,\\d+)*$"
+                }
+            },
+            "BeachLevel": {
+                "name": "level",
+                "in": "query",
+                "description": "Filtre des plages en fonction de leur niveau d'importance (1 : importance nationale, 2 : r\u00e9gionale, 3 : d\u00e9partementale)",
+                "required": false,
+                "schema": {
+                    "type": "number",
+                    "maximum": 3,
+                    "minimum": 1,
+                    "example": 2
+                }
+            },
+            "SearchCity": {
+                "name": "search",
+                "in": "query",
+                "description": "Portion du nom ou du code postal de la commune",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "example": "Rennes"
+                }
+            },
+            "SearchBeach": {
+                "name": "search",
+                "in": "query",
+                "description": "Portion du nom de la plage ou du nom de la commune ou encore de son code postal",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "example": "Dinard"
+                }
+            },
+            "BeachId": {
+                "name": "id",
+                "in": "query",
+                "description": "Identifiant num\u00e9rique de la plage",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "example": "66"
+                }
+            },
+            "LimitBeaches": {
+                "name": "limit",
+                "in": "query",
+                "description": "Nombre de plages maximum \u00e0 retourner",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "example": 50
+                }
+            },
+            "PortId": {
+                "name": "id",
+                "in": "query",
+                "description": "Identifiant alphanum\u00e9rique du Port",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "example": "1613"
+                }
+            },
+            "LimitPorts": {
+                "name": "limit",
+                "in": "query",
+                "description": "Nombre de ports maximum \u00e0 retourner",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "example": 50
+                }
+            },
+            "LandForecastDay": {
+                "name": "day",
+                "in": "path",
+                "description": "Jour pour lequel la pr\u00e9vision est demand\u00e9e (0 : aujourd'hui, 1 : demain, etc.)",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "maximum": 13,
+                    "minimum": 0
+                }
+            },
+            "LandForecastPeriod": {
+                "name": "period",
+                "in": "path",
+                "description": "P\u00e9riode pour laquelle la pr\u00e9vision est demand\u00e9e (0 : nuit, 1 : matin, 2 : apr\u00e8s-midi, 3 : soir, etc.)",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "maximum": 3,
+                    "minimum": 0
+                }
+            },
+            "LandForecastDayStart": {
+                "name": "start",
+                "in": "query",
+                "description": "Jour \u00e0 partir duquel la pr\u00e9vision est demand\u00e9e, inclus (0: aujourd'hui, 1: demain, etc.)",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "maximum": 13,
+                    "minimum": 0
+                }
+            },
+            "LandForecastDayEnd": {
+                "name": "end",
+                "in": "query",
+                "description": "Jour jusqu'auquel la pr\u00e9vision est demand\u00e9e, inclus (0: aujourd'hui, 1: demain, etc.)",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "maximum": 13,
+                    "minimum": 0
+                }
+            },
+            "BeachForecastDay": {
+                "name": "day",
+                "in": "path",
+                "description": "Jour pour lequel la pr\u00e9vision est demand\u00e9e (0: aujourd'hui, 1: demain, etc.)",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "maximum": 2,
+                    "minimum": 0
+                }
+            },
+            "World": {
+                "name": "world",
+                "in": "query",
+                "description": "Faut-il consid\u00e9rer les villes hors France m\u00e9tropolitaine ?",
+                "required": false,
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "HourlyForecast": {
+                "name": "hourly",
+                "in": "query",
+                "description": "Faut-il retourner des donn\u00e9es horaires lorsque c'est possible (par opposition \u00e0 tri-horaires) ?",
+                "required": false,
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "VariableWithAccumulator": {
+                "name": "variable",
+                "in": "query",
+                "description": "Une variable m\u00e9t\u00e9orologique\n* temperature_avg : Temp\u00e9rature moyenne\n* temperature_min : Temp\u00e9rature minimale\n* temperature_max : Temp\u00e9rature maximale\n* humidity_avg : Humidit\u00e9 relative moyenne\n* humidity_min : Humidit\u00e9 relative minimale\n* humidity_max : Humidit\u00e9 relative maximale\n* rainfall : Cumul pluviom\u00e9trique\n* rainrate_max : Intensit\u00e9 maximale des pr\u00e9cipitations\n* wind_direction : Vent dominant\n* wind_speed : Vent moyen\n* gust_max : Rafales maximales\n* pressure_avg : Pression atmosph\u00e9rique moyenne\n* pressure_min : Pression atmosph\u00e9rique minimale\n* pressure_max : Pression atmosph\u00e9rique maximale\n* global_radiation_max : Ensoleillement maximal\n",
+                "schema": {
+                    "enum": [
+                        "temperature_avg",
+                        "temperature_min",
+                        "temperature_max",
+                        "humidity_avg",
+                        "humidity_min",
+                        "humidity_max",
+                        "rainfall",
+                        "rainrate_max",
+                        "wind_direction",
+                        "wind_speed",
+                        "gust_max",
+                        "pressure_avg",
+                        "pressure_min",
+                        "pressure_max",
+                        "global_radiation_max"
+                    ]
+                }
+            },
+            "VariablesList": {
+                "name": "variables",
+                "in": "query",
+                "description": "Une liste s\u00e9par\u00e9e par des virgules de variables m\u00e9t\u00e9orologique pour filtrer ou trier des observations ou stations",
+                "schema": {
+                    "type": "string",
+                    "pattern": "^[a_z1-9_]+(,[a-z1-9_]+)*$",
+                    "example": "temperature,humidity"
+                }
+            },
+            "OpenStations": {
+                "name": "open_stations",
+                "in": "query",
+                "description": "Faut-il inclure les stations ouvertes ?",
+                "required": false,
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "Page": {
+                "name": "page",
+                "in": "query",
+                "description": "Page d'\u00e9l\u00e9ments \u00e0 r\u00e9cup\u00e9rer",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "minimum": 1
+                }
+            }
+        },
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "description": "Passage du token dans l'en-t\u00eate HTTP Authorization, sous la forme \"Authorization: Bearer &lt;token &gt;\"",
+                "bearerFormat": "MeteoConcept",
+                "scheme": "bearer"
+            },
+            "HeaderApiKey": {
+                "type": "apiKey",
+                "description": "Passage du token dans l'en-t\u00eate HTTP non-standard X-AUTH-TOKEN",
+                "name": "X-AUTH-TOKEN",
+                "in": "header"
+            },
+            "QueryApiKey": {
+                "type": "apiKey",
+                "description": "Passage du token comme param\u00e8tre de l'URL",
+                "name": "token",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "BearerAuth": []
+        },
+        {
+            "HeaderApiKey": []
+        },
+        {
+            "QueryApiKey": []
+        }
+    ]
+}

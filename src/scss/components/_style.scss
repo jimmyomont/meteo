@@ -1,0 +1,33 @@
+.box-container {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    width: 150px ;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: rgb(16, 28, 28);
+}
+
+#city {
+    background-color: blue;
+}
+
+#temp {
+    background-color: aquamarine;
+}
+
+#humidity {
+    background-color: cadetblue;
+}
+
+#wind {
+    background-color: cornflowerblue;
+}
